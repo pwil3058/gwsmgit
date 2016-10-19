@@ -1,0 +1,3 @@
+[submodule "gwsmgit_pkg/bab"]
+	path = gwsmgit_pkg/bab
+	url = git@github.com:pwil3058/pybab.git
