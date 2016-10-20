@@ -41,10 +41,10 @@ from ..bab.lib import utils
 
 from ..bab.scm_gui import do_opn as scm_do_opn
 
-recollect.define("main_window", "last_geometry", recollect.Defn(str, ""))
-recollect.define("main_window", "vpaned_position", recollect.Defn(int, -1))
-recollect.define("main_window", "hpaned_position", recollect.Defn(int, -1))
-recollect.define("main_window", "fthpaned_position", recollect.Defn(int, -1))
+recollect.define("main_window", "last_geometry", recollect.Defn(str, "900x600+100+100"))
+recollect.define("main_window", "vpaned_position", recollect.Defn(int, 300))
+recollect.define("main_window", "hpaned_position", recollect.Defn(int, 500))
+recollect.define("main_window", "fthpaned_position", recollect.Defn(int, 300))
 
 @singleton
 class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener, scm_gui.actions.WDListenerMixin, scm_do_opn.DoOpnMixin):
