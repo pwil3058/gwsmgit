@@ -14,22 +14,7 @@
 #  The Free Software Foundation, Inc., 51 Franklin Street,
 #  Fifth Floor, Boston, MA 02110-1301 USA
 
-"""Python package providing support for gwsm_git program"""
+"""<DOCSTRING GOES HERE>"""
 
 __all__ = []
 __author__ = "Peter Williams <pwil3058@gmail.com>"
-__version__ = "0.0"
-
-import os
-
-HOME = os.path.expanduser("~")
-APP_NAME = "gwsm_git"
-CONFIG_DIR_PATH = os.path.join(HOME, ".config", APP_NAME + os.extsep + "d")
-LOCAl_CONFIG_DIR_NAME = "." + APP_NAME + ".d"
-
-if not os.path.exists(CONFIG_DIR_PATH):
-    os.makedirs(CONFIG_DIR_PATH, 0o775)
-
-ISSUES_URL = "<https://github.com/pwil3058/gwsmgit/issues>"
-ISSUES_EMAIL = __author__
-ISSUES_VERSION = __version__

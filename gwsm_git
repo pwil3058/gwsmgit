@@ -16,11 +16,54 @@
 #  The Free Software Foundation, Inc., 51 Franklin Street,
 #  Fifth Floor, Boston, MA 02110-1301 USA
 
+"""GUI interface wrapper for managing a workspace using git"""
+
 __author__ = "Peter Williams <pwil3058@gmail.com>"
 
-def main(args):
-    return 0
+import argparse
+import os
+import sys
 
-if __name__ == '__main__':
-    import sys
-    sys.exit(main(sys.argv))
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+
+from gwsmgit_pkg.bab.gui import recollect
+from gwsmgit_pkg.bab.gui import dialogue
+from gwsmgit_pkg.gui import main_window
+
+parser = argparse.ArgumentParser(description=_("GUI to manage git workspaces"))
+
+parser.add_argument(
+    "workspace",
+    help=_("Directory containing workspace to be managed"),
+    metavar=_("dir"),
+    nargs="?"
+)
+
+args = parser.parse_args()
+
+recollect.define("workspace", "last_used", recollect.Defn(str, ""))
+
+if args.workspace:
+    try:
+        os.chdir(args.workspace)
+    except OSError as msg:
+        sys.stderr.write(str(msg) + "\n")
+        sys.exit(2)
+else:
+    last_dir = recollect.get("workspace", "last_used")
+    if os.path.isdir(last_dir):
+        try:
+            os.chdir(last_dir)
+        except OSError as msg:
+            pass # open in current directory
+
+try:
+    main_window.MainWindow().show()
+    Gtk.main()
+except SystemExit as edata:
+    raise edata # let the usual suspects handle this
+except:
+    dialogue.ask_for_bug_report(sys.exc_info())
+    sys.exit(3)
