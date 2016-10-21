@@ -53,12 +53,14 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
     UI_DESCR = """
     <ui>
         <menubar name="appn_left_menubar">
-            <menu name="appn_pgnd" action="actions_wd_menu">
+            <menu name="appn_cwd" action="actions_wd_menu">
               <menuitem action="scm_change_wd"/>
-              <menuitem action="scm_create_new_workspace"/>
               <menuitem action="scm_initialize_curdir"/>
               <menuitem action="scm_clone_repo"/>
               <menuitem action="actions_quit"/>
+            </menu>
+            <menu name="appn_wspce" action="actions_wspce_menu">
+              <menuitem action="scm_create_new_workspace"/>
             </menu>
         </menubar>
         <menubar name="appn_right_menubar">
@@ -102,7 +104,8 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
         self.add(vbox)
         mbar_box = Gtk.HBox()
         lmenu_bar = self.ui_manager.get_widget("/appn_left_menubar")
-        lmenu_bar.insert(scm_gui.wspce.generate_workspace_menu(), 1)
+        workspace_menu = self.ui_manager.get_widget("/appn_left_menubar/appn_wspce")
+        workspace_menu.get_submenu().insert(scm_gui.wspce.generate_chdir_to_workspace_menu(), 0)
         lmenu_bar.insert(submodules.generate_chdir_submodule_menu(), 2)
         mbar_box.pack_start(lmenu_bar, expand=True, fill=True, padding=0)
         mbar_box.pack_end(self.ui_manager.get_widget("/appn_right_menubar"), expand=False, fill=True, padding=0)
@@ -163,6 +166,7 @@ actions.CLASS_INDEP_AGS[actions.AC_DONT_CARE].add_actions(
     [
         ("config_menu", None, _("Configuration")),
         ("actions_wd_menu", None, _("Working Directory")),
+        ("actions_wspce_menu", None, _("Workspaces")),
         ("actions_quit", Gtk.STOCK_QUIT, _("Quit"), "",
          _("Quit"),
          lambda _action: Gtk.main_quit()
