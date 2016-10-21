@@ -127,6 +127,7 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
         hpaned.connect("notify", self._paned_notify_cb, "hpaned_position")
         fthpaned.connect("notify", self._paned_notify_cb, "fthpaned_position")
         nbook = Gtk.Notebook()
+        nbook.popup_enable()
         branches_list = git_gui.branches.BranchList()
         nbook.append_page(branches_list, Gtk.Label(label=_("Branches")))
         nbook.append_page(git_gui.tags.TagList(), Gtk.Label(label=_("Tags")))
@@ -136,10 +137,13 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
         hpaned.add2(nbook)
         if terminal.AVAILABLE:
             nbook = Gtk.Notebook()
+            nbook.popup_enable()
             nbook.append_page(console.LOG, Gtk.Label(label=_("Transaction Log")))
             nbook.append_page(terminal.Terminal(), Gtk.Label(label=_("Terminal")))
+            nbook.append_page(terminal.Terminal(False), Gtk.Label(label=_("Unbound Terminal")))
             if terminal.GITSOME_AVAILABLE:
                 nbook.append_page(terminal.GitsomeTerminal(), Gtk.Label(label=_("Gitsome Terminal")))
+            nbook.set_current_page(1)
             vpaned.add2(nbook)
         else:
             vpaned.add2(console.LOG)
