@@ -41,6 +41,8 @@ from ..bab.lib import utils
 
 from ..bab.scm_gui import do_opn as scm_do_opn
 
+from . import submodules
+
 recollect.define("main_window", "last_geometry", recollect.Defn(str, "900x600+100+100"))
 recollect.define("main_window", "vpaned_position", recollect.Defn(int, 300))
 recollect.define("main_window", "hpaned_position", recollect.Defn(int, 500))
@@ -66,7 +68,7 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
             </menu>
         </menubar>
         <toolbar name="appn_main_toolbar">
-             <toolitem action="scm_initialize_curdir"/>
+             <toolitem action="git_change_wd_to_superproject"/>
            <separator/>
              <toolitem action="git_wd_diff_dialog"/>
              <toolitem action="git_commit_staged_changes"/>
@@ -101,6 +103,7 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
         mbar_box = Gtk.HBox()
         lmenu_bar = self.ui_manager.get_widget("/appn_left_menubar")
         lmenu_bar.insert(scm_gui.wspce.generate_workspace_menu(), 1)
+        lmenu_bar.insert(submodules.generate_chdir_submodule_menu(), 2)
         mbar_box.pack_start(lmenu_bar, expand=True, fill=True, padding=0)
         mbar_box.pack_end(self.ui_manager.get_widget("/appn_right_menubar"), expand=False, fill=True, padding=0)
         vbox.pack_start(mbar_box, expand=False, fill=True, padding=0)
