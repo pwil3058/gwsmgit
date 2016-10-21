@@ -51,10 +51,10 @@ def _update_in_submodule_condns(*args, **kwargs):
 
 enotify.add_notification_cb(enotify.E_CHANGE_WD|scm.E_NEW_SCM, _update_in_submodule_condns)
 
-_SUBMODULE_PATH_RE = re.compile(r"\s*[a-fA-F0-9]+\s+(\S+)\s+\S*")
+_SUBMODULE_PATH_RE = re.compile(r"[a-fA-F0-9]+\s+(\S+)\s+\S*")
 def get_submodule_paths():
     text = runext.run_get_cmd(["git", "submodule", "status", "--recursive"], default="")
-    return [_SUBMODULE_PATH_RE.match(line).groups()[0] for line in text.splitlines()]
+    return [_SUBMODULE_PATH_RE.match(line[1:]).groups()[0] for line in text.splitlines()]
 
 class SubmodulePathMenu(Gtk.MenuItem):
     def __init__(self, label, item_activation_action):
