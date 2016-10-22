@@ -62,6 +62,8 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
             <menu name="appn_wspce" action="actions_wspce_menu">
               <menuitem action="scm_create_new_workspace"/>
             </menu>
+            <menu name="appn_submodules" action="actions_submodules_menu">
+            </menu>
         </menubar>
         <menubar name="appn_right_menubar">
             <menu name="appn_config" action="config_menu">
@@ -106,7 +108,8 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
         lmenu_bar = self.ui_manager.get_widget("/appn_left_menubar")
         workspace_menu = self.ui_manager.get_widget("/appn_left_menubar/appn_wspce")
         workspace_menu.get_submenu().insert(scm_gui.wspce.generate_chdir_to_workspace_menu(), 0)
-        lmenu_bar.insert(submodules.generate_chdir_submodule_menu(), 2)
+        submodule_menu = self.ui_manager.get_widget("/appn_left_menubar/appn_submodules")
+        submodule_menu.get_submenu().insert(submodules.generate_chdir_submodule_menu(), 0)
         mbar_box.pack_start(lmenu_bar, expand=True, fill=True, padding=0)
         mbar_box.pack_end(self.ui_manager.get_widget("/appn_right_menubar"), expand=False, fill=True, padding=0)
         vbox.pack_start(mbar_box, expand=False, fill=True, padding=0)
@@ -167,6 +170,7 @@ actions.CLASS_INDEP_AGS[actions.AC_DONT_CARE].add_actions(
         ("config_menu", None, _("Configuration")),
         ("actions_wd_menu", None, _("Working Directory")),
         ("actions_wspce_menu", None, _("Workspaces")),
+        ("actions_submodules_menu", None, _("Submodules")),
         ("actions_quit", Gtk.STOCK_QUIT, _("Quit"), "",
          _("Quit"),
          lambda _action: Gtk.main_quit()

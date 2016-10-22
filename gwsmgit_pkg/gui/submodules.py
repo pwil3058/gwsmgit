@@ -77,8 +77,8 @@ class SubmodulePathMenu(Gtk.MenuItem):
             result = self._item_activation_action(submodule_path)
         dialogue.main_window.report_any_problems(result)
 
-def generate_chdir_submodule_menu():
-    return SubmodulePathMenu(_("Submodules"), lambda submodule_path: wspce.chdir(submodule_path))
+def generate_chdir_submodule_menu(label=_("Change Directory To")):
+    return SubmodulePathMenu(label, lambda submodule_path: wspce.chdir(submodule_path))
 
 def chdir_to_superproject():
     sp_dir_path = git_ifce.SCM.get_superproject_root()
