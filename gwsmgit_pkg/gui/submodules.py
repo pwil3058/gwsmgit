@@ -24,21 +24,21 @@ import re
 
 from gi.repository import Gtk
 
-from ..bab import scm
+from ..wsm import scm
 
-from ..bab.git_gui import ifce as git_ifce
-from ..bab.git import git_utils
+from ..wsm.git_gui import ifce as git_ifce
+from ..wsm.git import git_utils
 
-from ..bab.gui import actions
-from ..bab.gui import apath
-from ..bab.gui import dialogue
+from ..wsm.gui import actions
+from ..wsm.gui import apath
+from ..wsm.gui import dialogue
 
-from ..bab.lib import enotify
-from ..bab.lib import runext
+from ..wsm.lib import enotify
+from ..wsm.lib import runext
 
-from ..bab.scm_gui.actions import AC_IN_SCM_PGND
-from ..bab.scm_gui import repos
-from ..bab.scm_gui import wspce
+from ..wsm.scm_gui.actions import AC_IN_SCM_PGND
+from ..wsm.scm_gui import repos
+from ..wsm.scm_gui import wspce
 
 from .. import CONFIG_DIR_PATH
 

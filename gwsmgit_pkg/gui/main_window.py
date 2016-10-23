@@ -25,21 +25,21 @@ from gi.repository import Gtk
 
 from .. import APP_NAME
 
-from ..bab import scm_gui
-from ..bab import git_gui
+from ..wsm import scm_gui
+from ..wsm import git_gui
 
-from ..bab.gui import actions
-from ..bab.gui import console
-from ..bab.gui import dialogue
-from ..bab.gui import icons
-from ..bab.gui import recollect
-from ..bab.gui import terminal
+from ..wsm.gui import actions
+from ..wsm.gui import console
+from ..wsm.gui import dialogue
+from ..wsm.gui import icons
+from ..wsm.gui import recollect
+from ..wsm.gui import terminal
 
-from ..bab.lib.decorators import singleton
-from ..bab.lib import enotify
-from ..bab.lib import utils
+from ..wsm.lib.decorators import singleton
+from ..wsm.lib import enotify
+from ..wsm.lib import utils
 
-from ..bab.scm_gui import do_opn as scm_do_opn
+from ..wsm.scm_gui import do_opn as scm_do_opn
 
 from . import submodules
 
