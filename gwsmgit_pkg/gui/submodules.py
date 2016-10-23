@@ -33,8 +33,8 @@ from ..wsm.gui import actions
 from ..wsm.gui import apath
 from ..wsm.gui import dialogue
 
-from ..wsm.lib import enotify
-from ..wsm.lib import runext
+from ..wsm.bab import enotify
+from ..wsm.bab import runext
 
 from ..wsm.scm_gui.actions import AC_IN_SCM_PGND
 from ..wsm.scm_gui import repos

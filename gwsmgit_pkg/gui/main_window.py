@@ -35,9 +35,9 @@ from ..wsm.gui import icons
 from ..wsm.gui import recollect
 from ..wsm.gui import terminal
 
-from ..wsm.lib.decorators import singleton
-from ..wsm.lib import enotify
-from ..wsm.lib import utils
+from ..wsm.bab.decorators import singleton
+from ..wsm.bab import enotify
+from ..wsm.bab import utils
 
 from ..wsm.scm_gui import do_opn as scm_do_opn
 
