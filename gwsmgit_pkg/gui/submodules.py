@@ -27,14 +27,20 @@ from gi.repository import Gtk
 from ..bab import scm
 
 from ..bab.git_gui import ifce as git_ifce
+from ..bab.git import git_utils
 
 from ..bab.gui import actions
+from ..bab.gui import apath
 from ..bab.gui import dialogue
 
 from ..bab.lib import enotify
 from ..bab.lib import runext
 
+from ..bab.scm_gui.actions import AC_IN_SCM_PGND
+from ..bab.scm_gui import repos
 from ..bab.scm_gui import wspce
+
+from .. import CONFIG_DIR_PATH
 
 AC_NOT_IN_SUBMODULE, AC_IN_SUBMODULE, _AC_MASK = actions.ActionCondns.new_flags_and_mask(2)
 
@@ -51,10 +57,30 @@ def _update_in_submodule_condns(*args, **kwargs):
 
 enotify.add_notification_cb(enotify.E_CHANGE_WD|scm.E_NEW_SCM, _update_in_submodule_condns)
 
-_SUBMODULE_PATH_RE = re.compile(r"[a-fA-F0-9]+\s+(\S+)\s+\S*")
-def get_submodule_paths():
-    text = runext.run_get_cmd(["git", "submodule", "status", "--recursive"], default="")
-    return [_SUBMODULE_PATH_RE.match(line[1:]).groups()[0] for line in text.splitlines()]
+class AddSubmoduleDialog(repos.RepoSelectDialog):
+    def __init__(self, parent=None):
+        repos.RepoSelectDialog.__init__(self, parent=parent)
+        self._browse_button.set_tooltip_text(_("Browse for a local repository to add as a submodule"))
+        for subdir_path in git_utils.get_recognized_subdirs():
+            self._target.append_text(subdir_path)
+        self.connect("response", self._response_cb)
+    @staticmethod
+    def _response_cb(dialog, response_id):
+        if response_id == Gtk.ResponseType.OK:
+            repo = dialog.get_path()
+            if not repo:
+                dialog.report_failure(_("Source repository must be specified"))
+                return
+            with dialog.showing_busy():
+                cmd = ["git", "submodule", "add", repo]
+                target = dialog.get_target()
+                if target:
+                    cmd.append(target)
+                result = git_ifce.do_action_cmd(cmd, scm.E_NEW_SCM|scm.E_FILE_CHANGES, None, [])
+                if dialog.report_any_problems(result):
+                    # NB if there were problems leave the dialog open and give them another go
+                    return
+        dialog.destroy()
 
 class SubmodulePathMenu(Gtk.MenuItem):
     def __init__(self, label, item_activation_action):
@@ -64,7 +90,7 @@ class SubmodulePathMenu(Gtk.MenuItem):
         self.connect("enter_notify_event", self._enter_notify_even_cb)
     def _build_submenu(self):
         _menu = Gtk.Menu()
-        for submodule_path in get_submodule_paths():
+        for submodule_path in git_utils.get_submodule_paths():
             _menu_item = Gtk.MenuItem(submodule_path)
             _menu_item.connect("activate", self._item_activation_cb, submodule_path)
             _menu_item.show()
@@ -90,6 +116,15 @@ actions.CLASS_INDEP_AGS[AC_IN_SUBMODULE].add_actions(
         ("git_change_wd_to_superproject", Gtk.STOCK_GOTO_BOTTOM, _("Super"), "",
          _("Change current working directory to this submodule's superproject's root directory"),
          lambda _action: chdir_to_superproject()
+        ),
+    ]
+)
+
+actions.CLASS_INDEP_AGS[AC_IN_SCM_PGND].add_actions(
+    [
+        ("git_add_submodule", Gtk.STOCK_ADD, _("Add"), "",
+         _("Add a new submodule to this workspace repository"),
+         lambda _action: AddSubmoduleDialog().run()
         ),
     ]
 )

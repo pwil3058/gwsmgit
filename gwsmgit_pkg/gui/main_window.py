@@ -63,6 +63,7 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
               <menuitem action="scm_create_new_workspace"/>
             </menu>
             <menu name="appn_submodules" action="actions_submodules_menu">
+              <menuitem action="git_add_submodule"/>
             </menu>
         </menubar>
         <menubar name="appn_right_menubar">
