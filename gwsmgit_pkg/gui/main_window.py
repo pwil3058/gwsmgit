@@ -41,6 +41,7 @@ from ..wsm.bab import utils
 
 from ..wsm.scm_gui import do_opn as scm_do_opn
 
+from . import friends
 from . import submodules
 
 recollect.define("main_window", "last_geometry", recollect.Defn(str, "900x600+100+100"))
@@ -64,6 +65,12 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
             </menu>
             <menu name="appn_submodules" action="actions_submodules_menu">
               <menuitem action="git_add_submodule"/>
+            </menu>
+            <menu name="appn_friends" action="git_friends_menu">
+              <menuitem action="git_launch_gitg"/>
+              <menuitem action="git_launch_gitk"/>
+              <menuitem action="git_launch_git-dag"/>
+              <menuitem action="git_launch_git-cola"/>
             </menu>
         </menubar>
         <menubar name="appn_right_menubar">
