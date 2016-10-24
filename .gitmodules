@@ -1,3 +1,6 @@
 [submodule "pixmaps"]
 	path = pixmaps
 	url = git@github.com:pwil3058/gwsmpixmaps.git
+[submodule "gwsmgit_pkg/wsm"]
+	path = gwsmgit_pkg/wsm
+	url = git@github.com:pwil3058/pysm_wsm.git

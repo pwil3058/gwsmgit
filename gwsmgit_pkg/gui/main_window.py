@@ -28,12 +28,12 @@ from .. import APP_NAME
 from ..wsm import scm_gui
 from ..wsm import git_gui
 
-from ..wsm.gui import actions
-from ..wsm.gui import console
-from ..wsm.gui import dialogue
-from ..wsm.gui import icons
-from ..wsm.gui import recollect
-from ..wsm.gui import terminal
+from ..wsm.gtx import actions
+from ..wsm.gtx import console
+from ..wsm.gtx import dialogue
+from ..wsm.gtx import icons
+from ..wsm.gtx import recollect
+from ..wsm.gtx import terminal
 
 from ..wsm.bab.decorators import singleton
 from ..wsm.bab import enotify

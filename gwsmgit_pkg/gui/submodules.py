@@ -29,9 +29,9 @@ from ..wsm import scm
 from ..wsm.git_gui import ifce as git_ifce
 from ..wsm.git import git_utils
 
-from ..wsm.gui import actions
-from ..wsm.gui import apath
-from ..wsm.gui import dialogue
+from ..wsm.gtx import actions
+from ..wsm.gtx import apath
+from ..wsm.gtx import dialogue
 
 from ..wsm.bab import enotify
 from ..wsm.bab import runext
