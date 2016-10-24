@@ -1,6 +1,3 @@
-[submodule "gwsmgit_pkg/bab"]
-	path = gwsmgit_pkg/wsm
-	url = git@github.com:pwil3058/pybab.git
 [submodule "pixmaps"]
 	path = pixmaps
 	url = git@github.com:pwil3058/gwsmpixmaps.git
