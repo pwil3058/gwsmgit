@@ -33,3 +33,4 @@ if not os.path.exists(CONFIG_DIR_PATH):
 ISSUES_URL = "<https://github.com/pwil3058/gwsmgit/issues>"
 ISSUES_EMAIL = __author__
 ISSUES_VERSION = __version__
+
