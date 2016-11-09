@@ -26,6 +26,8 @@ from gi.repository import Gtk
 from .. import APP_NAME
 
 from ..wsm import scm_gui
+from ..wsm.scm_gui import scm_actions
+from ..wsm.scm_gui import scm_gui_ifce
 from ..wsm import git_gui
 
 from ..wsm.gtx import actions
@@ -39,7 +41,7 @@ from ..wsm.bab.decorators import singleton
 from ..wsm.bab import enotify
 from ..wsm.bab import utils
 
-from ..wsm.scm_gui import do_opn as scm_do_opn
+from ..wsm.scm_gui import scm_do_opn
 
 from . import friends
 from . import submodules
@@ -50,7 +52,7 @@ recollect.define("main_window", "hpaned_position", recollect.Defn(int, 500))
 recollect.define("main_window", "fthpaned_position", recollect.Defn(int, 300))
 
 @singleton
-class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener, scm_gui.actions.WDListenerMixin, scm_do_opn.DoOpnMixin):
+class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener, scm_actions.WDListenerMixin, scm_do_opn.DoOpnMixin):
     UI_DESCR = """
     <ui>
         <menubar name="appn_left_menubar">
@@ -99,7 +101,7 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
     </ui>
     """
     def __init__(self):
-        scm_gui.ifce.init()
+        scm_gui_ifce.init()
         dialogue.MainWindow.__init__(self)
         self.parse_geometry(recollect.get("main_window", "last_geometry"))
         self.set_icon_from_file(icons.APP_ICON_FILE)
@@ -108,14 +110,14 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
         self._update_title()
         actions.CAGandUIManager.__init__(self)
         enotify.Listener.__init__(self)
-        scm_gui.actions.WDListenerMixin.__init__(self)
+        scm_actions.WDListenerMixin.__init__(self)
         self.ui_manager.add_ui_from_string(MainWindow.UI_DESCR)
         vbox = Gtk.VBox()
         self.add(vbox)
         mbar_box = Gtk.HBox()
         lmenu_bar = self.ui_manager.get_widget("/appn_left_menubar")
         workspace_menu = self.ui_manager.get_widget("/appn_left_menubar/appn_wspce")
-        workspace_menu.get_submenu().insert(scm_gui.wspce.generate_chdir_to_workspace_menu(), 0)
+        workspace_menu.get_submenu().insert(scm_gui.scm_wspce.generate_chdir_to_workspace_menu(), 0)
         submodule_menu = self.ui_manager.get_widget("/appn_left_menubar/appn_submodules")
         submodule_menu.get_submenu().insert(submodules.generate_chdir_submodule_menu(), 0)
         mbar_box.pack_start(lmenu_bar, expand=True, fill=True, padding=0)

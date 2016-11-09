@@ -26,7 +26,7 @@ from gi.repository import Gtk
 
 from ..wsm import scm
 
-from ..wsm.git_gui import ifce as git_ifce
+from ..wsm.git_gui import git_gui_ifce
 from ..wsm.git import git_utils
 
 from ..wsm.gtx import actions
@@ -36,9 +36,9 @@ from ..wsm.gtx import dialogue
 from ..wsm.bab import enotify
 from ..wsm.bab import runext
 
-from ..wsm.scm_gui.actions import AC_IN_SCM_PGND
-from ..wsm.scm_gui import repos
-from ..wsm.scm_gui import wspce
+from ..wsm.scm_gui.scm_actions import AC_IN_SCM_PGND
+from ..wsm.scm_gui import scm_repos
+from ..wsm.scm_gui import scm_wspce
 
 from .. import CONFIG_DIR_PATH
 
@@ -57,9 +57,9 @@ def _update_in_submodule_condns(*args, **kwargs):
 
 enotify.add_notification_cb(enotify.E_CHANGE_WD|scm.E_NEW_SCM, _update_in_submodule_condns)
 
-class AddSubmoduleDialog(repos.RepoSelectDialog):
+class AddSubmoduleDialog(scm_repos.RepoSelectDialog):
     def __init__(self, parent=None):
-        repos.RepoSelectDialog.__init__(self, parent=parent)
+        scm_repos.RepoSelectDialog.__init__(self, parent=parent)
         self._browse_button.set_tooltip_text(_("Browse for a local repository to add as a submodule"))
         for subdir_path in git_utils.get_recognized_subdirs():
             self._target.append_text(subdir_path)
@@ -76,7 +76,7 @@ class AddSubmoduleDialog(repos.RepoSelectDialog):
                 target = dialog.get_target()
                 if target:
                     cmd.append(target)
-                result = git_ifce.do_action_cmd(cmd, scm.E_NEW_SCM|scm.E_FILE_CHANGES, None, [])
+                result = git_gui_ifce.do_action_cmd(cmd, scm.E_NEW_SCM|scm.E_FILE_CHANGES, None, [])
                 if dialog.report_any_problems(result):
                     # NB if there were problems leave the dialog open and give them another go
                     return
@@ -104,12 +104,12 @@ class SubmodulePathMenu(Gtk.MenuItem):
         dialogue.main_window.report_any_problems(result)
 
 def generate_chdir_submodule_menu(label=_("Change Directory To")):
-    return SubmodulePathMenu(label, lambda submodule_path: wspce.chdir(submodule_path))
+    return SubmodulePathMenu(label, lambda submodule_path: scm_wspce.chdir(submodule_path))
 
 def chdir_to_superproject():
-    sp_dir_path = git_ifce.SCM.get_superproject_root()
+    sp_dir_path = git_gui_ifce.SCM.get_superproject_root()
     if sp_dir_path:
-        wspce.chdir(sp_dir_path)
+        scm_wspce.chdir(sp_dir_path)
 
 actions.CLASS_INDEP_AGS[AC_IN_SUBMODULE].add_actions(
     [

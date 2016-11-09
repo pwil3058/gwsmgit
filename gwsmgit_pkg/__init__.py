@@ -25,6 +25,7 @@ import os
 HOME = os.path.expanduser("~")
 APP_NAME = "gwsm_git"
 CONFIG_DIR_PATH = os.path.join(HOME, ".config", APP_NAME + os.extsep + "d")
+PGND_CONFIG_DIR_PATH = None
 LOCAl_CONFIG_DIR_NAME = "." + APP_NAME + ".d"
 
 if not os.path.exists(CONFIG_DIR_PATH):
@@ -33,4 +34,3 @@ if not os.path.exists(CONFIG_DIR_PATH):
 ISSUES_URL = "<https://github.com/pwil3058/gwsmgit/issues>"
 ISSUES_EMAIL = __author__
 ISSUES_VERSION = __version__
-
