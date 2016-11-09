@@ -26,6 +26,8 @@ from gi.repository import Gtk
 from .. import APP_NAME
 
 from ..wsm import scm_gui
+from ..wsm.scm_gui import scm_actions
+from ..wsm.scm_gui import scm_gui_ifce
 from ..wsm import git_gui
 
 from ..wsm.gtx import actions
@@ -50,7 +52,7 @@ recollect.define("main_window", "hpaned_position", recollect.Defn(int, 500))
 recollect.define("main_window", "fthpaned_position", recollect.Defn(int, 300))
 
 @singleton
-class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener, scm_gui.actions.WDListenerMixin, scm_do_opn.DoOpnMixin):
+class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener, scm_actions.WDListenerMixin, scm_do_opn.DoOpnMixin):
     UI_DESCR = """
     <ui>
         <menubar name="appn_left_menubar">
@@ -99,7 +101,7 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
     </ui>
     """
     def __init__(self):
-        scm_gui.ifce.init()
+        scm_gui_ifce.init()
         dialogue.MainWindow.__init__(self)
         self.parse_geometry(recollect.get("main_window", "last_geometry"))
         self.set_icon_from_file(icons.APP_ICON_FILE)
@@ -108,7 +110,7 @@ class MainWindow(dialogue.MainWindow, actions.CAGandUIManager, enotify.Listener,
         self._update_title()
         actions.CAGandUIManager.__init__(self)
         enotify.Listener.__init__(self)
-        scm_gui.actions.WDListenerMixin.__init__(self)
+        scm_actions.WDListenerMixin.__init__(self)
         self.ui_manager.add_ui_from_string(MainWindow.UI_DESCR)
         vbox = Gtk.VBox()
         self.add(vbox)

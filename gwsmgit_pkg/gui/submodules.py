@@ -26,7 +26,7 @@ from gi.repository import Gtk
 
 from ..wsm import scm
 
-from ..wsm.git_gui import ifce as git_ifce
+from ..wsm.git_gui import ifce as git_gui_ifce
 from ..wsm.git import git_utils
 
 from ..wsm.gtx import actions
@@ -36,7 +36,7 @@ from ..wsm.gtx import dialogue
 from ..wsm.bab import enotify
 from ..wsm.bab import runext
 
-from ..wsm.scm_gui.actions import AC_IN_SCM_PGND
+from ..wsm.scm_gui.scm_actions import AC_IN_SCM_PGND
 from ..wsm.scm_gui import repos
 from ..wsm.scm_gui import wspce
 
@@ -76,7 +76,7 @@ class AddSubmoduleDialog(repos.RepoSelectDialog):
                 target = dialog.get_target()
                 if target:
                     cmd.append(target)
-                result = git_ifce.do_action_cmd(cmd, scm.E_NEW_SCM|scm.E_FILE_CHANGES, None, [])
+                result = git_gui_ifce.do_action_cmd(cmd, scm.E_NEW_SCM|scm.E_FILE_CHANGES, None, [])
                 if dialog.report_any_problems(result):
                     # NB if there were problems leave the dialog open and give them another go
                     return
@@ -107,7 +107,7 @@ def generate_chdir_submodule_menu(label=_("Change Directory To")):
     return SubmodulePathMenu(label, lambda submodule_path: wspce.chdir(submodule_path))
 
 def chdir_to_superproject():
-    sp_dir_path = git_ifce.SCM.get_superproject_root()
+    sp_dir_path = git_gui_ifce.SCM.get_superproject_root()
     if sp_dir_path:
         wspce.chdir(sp_dir_path)
 
