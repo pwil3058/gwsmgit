@@ -26,7 +26,7 @@ from gi.repository import Gtk
 
 from ..wsm import scm
 
-from ..wsm.git_gui import git_gui_ifce
+from ..wsm.git.gui import git_gui_ifce
 from ..wsm.git import git_utils
 
 from ..wsm.gtx import actions

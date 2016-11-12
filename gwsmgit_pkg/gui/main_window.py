@@ -27,7 +27,7 @@ from .. import APP_NAME
 
 from ..wsm.scm.gui import scm_actions
 from ..wsm.scm.gui import scm_gui_ifce
-from ..wsm import git_gui
+from ..wsm.git import gui as git_gui
 
 from ..wsm.gtx import actions
 from ..wsm.gtx import console
