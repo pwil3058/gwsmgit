@@ -36,9 +36,9 @@ from ..wsm.gtx import dialogue
 from ..wsm.bab import enotify
 from ..wsm.bab import runext
 
-from ..wsm.scm_gui.scm_actions import AC_IN_SCM_PGND
-from ..wsm.scm_gui import scm_repos
-from ..wsm.scm_gui import scm_wspce
+from ..wsm.scm.gui.scm_actions import AC_IN_SCM_PGND
+from ..wsm.scm.gui import scm_repos
+from ..wsm.scm.gui import scm_wspce
 
 from .. import CONFIG_DIR_PATH
 
