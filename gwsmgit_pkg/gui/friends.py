@@ -23,10 +23,10 @@ import shutil
 
 from gi.repository import Gtk
 
-from ..wsm.bab import runext
+from ..bab import runext
 
-from ..wsm.gtx import actions
-from ..wsm.gtx import dialogue
+from ..gtx import actions
+from ..gtx import dialogue
 
 def launch_friend(friend_name):
     friend_exec = shutil.which(friend_name)

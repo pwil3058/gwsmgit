@@ -25,23 +25,23 @@ from gi.repository import Gtk
 
 from .. import APP_NAME
 
-from ..wsm.scm.gui import scm_actions
-from ..wsm.scm.gui import scm_gui_ifce
-from ..wsm.git import gui as git_gui
+from ..scm.gui import scm_actions
+from ..scm.gui import scm_gui_ifce
+from ..git import gui as git_gui
 
-from ..wsm.gtx import actions
-from ..wsm.gtx import console
-from ..wsm.gtx import dialogue
-from ..wsm.gtx import icons
-from ..wsm.gtx import recollect
-from ..wsm.gtx import terminal
+from ..gtx import actions
+from ..gtx import console
+from ..gtx import dialogue
+from ..gtx import icons
+from ..gtx import recollect
+from ..gtx import terminal
 
-from ..wsm.bab.decorators import singleton
-from ..wsm.bab import enotify
-from ..wsm.bab import utils
+from ..bab.decorators import singleton
+from ..bab import enotify
+from ..bab import utils
 
-from ..wsm.scm.gui import scm_do_opn
-from ..wsm.scm.gui import scm_wspce
+from ..scm.gui import scm_do_opn
+from ..scm.gui import scm_wspce
 
 from . import friends
 from . import submodules
