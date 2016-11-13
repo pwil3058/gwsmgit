@@ -28,8 +28,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-from gwsmgit_pkg.wsm.gtx import recollect
-from gwsmgit_pkg.wsm.gtx import dialogue
+from gwsmgit_pkg.gtx import recollect
+from gwsmgit_pkg.gtx import dialogue
 from gwsmgit_pkg.gui import main_window
 
 parser = argparse.ArgumentParser(description=_("GUI to manage git workspaces"))
