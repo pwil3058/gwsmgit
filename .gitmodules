@@ -4,3 +4,21 @@
 [submodule "gwsmgit_pkg/wsm"]
 	path = gwsmgit_pkg/wsm
 	url = git@github.com:pwil3058/pysm_wsm.git
+[submodule "gwsmgit_pkg/git"]
+	path = gwsmgit_pkg/git
+	url = git@github.com:pwil3058/pysm_git.git
+[submodule "gwsmgit_pkg/scm"]
+	path = gwsmgit_pkg/scm
+	url = git@github.com:pwil3058/pysm_scm.git
+[submodule "gwsmgit_pkg/bab"]
+	path = gwsmgit_pkg/bab
+	url = git@github.com:pwil3058/pysm_bab.git
+[submodule "gwsmgit_pkg/gtx"]
+	path = gwsmgit_pkg/gtx
+	url = git@github.com:pwil3058/pysm_gtx.git
+[submodule "gwsmgit_pkg/icons"]
+	path = gwsmgit_pkg/wsm_icons
+	url = git@github.com:pwil3058/pysm_icons.git
+[submodule "gwsmgit_pkg/patch_diff"]
+	path = gwsmgit_pkg/patch_diff
+	url = git@github.com:pwil3058/pysm_patch_diff.git
